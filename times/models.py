@@ -8,6 +8,3 @@ class Drop(models.Model):
     time = models.DateTimeField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    
-    class Meta:
-        db_table = 'drops'

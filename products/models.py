@@ -9,7 +9,3 @@ class Product(models.Model):
     description = models.TextField()
     quantity = models.IntegerField()
     interestproduct = models.BooleanField()
-    
-    
-    class Meta:
-        db_table = 'products'

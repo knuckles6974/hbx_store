@@ -11,16 +11,8 @@ class User(models.Model):
     password = models.IntegerField()
     phone_number = models.CharField(max_length=14)
     gender = models.BooleanField()
-    
-    
-    class Meta:
-        db_table = 'users'
 
 
 class WishList(models.Model):
     user  = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    
-    
-    class Meta:
-        db_table = 'wishlists'
