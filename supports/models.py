@@ -7,7 +7,7 @@ class Support(models.Model):
     qna = models.TextField()
     returns = models.TextField()
     request = models.TextField()
-    paymaent = models.CharField()
-    orderstate = models.CharField()
+    payment = models.CharField(max_length=30)
+    orderstate = models.CharField(max_length=4000)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     

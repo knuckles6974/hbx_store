@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-
+import datetime
 from pathlib import Path
 from my_settings   import DATABASES, SECRET_KEY
 
@@ -43,18 +43,60 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'times',
-    'users',
+    'users.apps.UsersConfig',
     'carts',
     'categories',
+    'supports',
     'products',
     'rest_framework',
     'corsheaders',
     'django_extensions',
-    'psycopg2'
+    'psycopg2',
+    'rest_framework.authtoken',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'rest_auth',
+    'rest_auth.registration',
 
 
-    
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        #'rest_framework.permissions.IsAuthenticated', # 인증된 사용자만 접근 가능
+        #'rest_framework.permissions.IsAdminUser', # 관리자만 접근 가능
+        'rest_framework.permissions.AllowAny',
+        
+        # 누구나 접근 가능
+
+    ),
+   
+}        
+
+
+{    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'api.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
+    'PAGE_SIZE': 100,
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_NAME' : 'AUTHORIZATION',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken', ),
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256', # 암호화 알고리즘
+    'JWT_ALLOW_REFRESH': False, # refresh 사용 여부
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), # 유효기간 설정
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28), # JWT 토큰 갱신 유효기간
+    # import datetime 상단에 import 하기
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -163,3 +205,5 @@ CORS_ALLOW_HEADERS = (
 
 
 APPEND_SLASH = False
+
+AUTH_USER_MODEL = 'users.User'

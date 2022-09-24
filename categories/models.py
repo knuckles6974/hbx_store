@@ -6,7 +6,3 @@ class Category(models.Model):
     woman = models.CharField(max_length=50)
     life = models.CharField(max_length=50)
     sale = models.CharField(max_length=50)
-    
-    
-    class Meta:
-        db_table = 'categories'
